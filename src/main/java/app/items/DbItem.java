@@ -1,9 +1,6 @@
 package app.items;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,9 +20,13 @@ public class DbItem {
     private String name;
     private String type;
     private String unit;
-    private String isDouble;
 
+    @Column(name="isdouble")
+    private boolean isDouble;
+
+    @Column(name="storagequantity")
     private double storageQuantity;
+    @Column(name="shopquantity")
     private double shopQuantity;
     private double price;
 }

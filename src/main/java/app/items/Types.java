@@ -1,14 +1,19 @@
 package app.items;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
+@Service
 public class Types {
-    public static Set<TypeUnit> types = new HashSet<>();
+    public static Map<String, TypeUnit> types = new HashMap<>();
 
     public void createNewType(String name, boolean isDouble, String shortName){
-        types.add(new TypeUnit(name, isDouble, shortName));
+        types.put(name, new TypeUnit(name, isDouble, shortName));
+    }
+
+    public TypeUnit getType(String name){
+        return types.get(name);
     }
 }
