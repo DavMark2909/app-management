@@ -1,14 +1,18 @@
 package app.controller;
 
+import app.dto.ItemCreationDto;
+import app.dto.TypeCreationDto;
+import app.exception.TypeAlreadyExists;
 import app.items.Item;
 import app.service.DbToItemMapper;
 import app.service.ItemService;
+import app.service.TypeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +22,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ItemsController {
     private final ItemService service;
+    private final TypeService typeService;
     private final DbToItemMapper mapper;
 
     @GetMapping("/getAll")
@@ -34,5 +39,20 @@ public class ItemsController {
         return ResponseEntity.ok(items);
     }
 
+    @PostMapping("/createType")
+    public ResponseEntity<?> createNewType(@RequestBody TypeCreationDto dto){
+        try {
+            return ResponseEntity.ok(typeService.createNewType(dto));
+        } catch (TypeAlreadyExists e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/newItem")
+    public ResponseEntity<?> addNewItem(@RequestBody ItemCreationDto dto){
+        try{
+            return ResponseEntity.ok(service.createNewItem(dto));
+        }
+    }
 
 }

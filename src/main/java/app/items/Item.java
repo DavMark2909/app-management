@@ -10,4 +10,5 @@ public class Item {
     private long id;
     private TypeUnit type;
     private double price;
+    private boolean isDouble;
 }
