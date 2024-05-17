@@ -52,6 +52,8 @@ public class ItemsController {
     public ResponseEntity<?> addNewItem(@RequestBody ItemCreationDto dto){
         try{
             return ResponseEntity.ok(service.createNewItem(dto));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 

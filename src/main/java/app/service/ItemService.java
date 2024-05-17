@@ -69,6 +69,6 @@ public class ItemService {
             throw new Exception("Attempt to add a new item with a non-existing type");
         Item item = Item.builder().price(dto.getPrice()).name(dto.getName()).type(type).isDouble(dto.isDouble()).build();
         DbItem dbItem = ItemToDbConverter.convertItemToDb(item);
-        repository.save(dbItem);
+        return repository.save(dbItem);
     }
 }
