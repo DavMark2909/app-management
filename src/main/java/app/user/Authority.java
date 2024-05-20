@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -17,5 +19,5 @@ public class Authority {
     private Integer id;
     private String name;
     @ManyToMany(mappedBy = "authorities")
-    private User user;
+    private Set<User> user;
 }
